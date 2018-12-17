@@ -1,0 +1,13 @@
+workspace:
+  base: .
+  path: /
+
+pipeline:
+  build:
+    image: gentoo/stage3-amd64
+    privileged: true
+    commands:
+      - emerge-webrsync -q
+      - echo "ACCEPT_KEYWORDS="~amd64"" >> /etc/portage/make.conf
+      - emerge --autounmask --autounmask-continue --ask=n --jobs=3 -quUDN --with-bdeps=y @world
+      - emerge --autounmask --autounmask-continue --ask=n --jobs=3 -q clang cppcheck
