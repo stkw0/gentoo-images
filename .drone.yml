@@ -9,5 +9,6 @@ pipeline:
     commands:
       - emerge-webrsync -q
       - echo "ACCEPT_KEYWORDS="~amd64"" >> /etc/portage/make.conf
-      - emerge --autounmask --autounmask-continue --ask=n --jobs=3 -quUDN --with-bdeps=y @world --exclude metalog
-      - emerge --autounmask --autounmask-continue --ask=n --jobs=3 -q clang cppcheck
+      - echo "MAKEOPTS="-j8"" >> /etc/portage/make.conf
+      - emerge --autounmask --autounmask-continue --ask=n -quUDN --with-bdeps=y @world --exclude metalog
+      - emerge --autounmask --autounmask-continue --ask=n -q clang cppcheck
