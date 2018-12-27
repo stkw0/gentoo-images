@@ -10,5 +10,11 @@ pipeline:
       - emerge-webrsync -q
       - echo "ACCEPT_KEYWORDS="~amd64"" >> /etc/portage/make.conf
       - echo "MAKEOPTS="-j8"" >> /etc/portage/make.conf
-      - emerge --autounmask --autounmask-continue --ask=n -quUDN --with-bdeps=y @world --exclude metalog 2>&1 | tail -n 100 
-      - emerge --autounmask --autounmask-continue --ask=n -q clang cppcheck
+      #- emerge --autounmask --autounmask-continue --ask=n -quUDN --with-bdeps=y @world --exclude metalog
+      #- emerge --autounmask --autounmask-continue --ask=n -q clang cppcheck
+    image: plugins/docker
+    settings:
+      username: stkw0
+      password:
+        from_secret: docker_password
+      repo: stkw0/test-image
