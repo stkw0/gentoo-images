@@ -3,18 +3,13 @@ workspace:
   path: /
 
 pipeline:
-  build:
-    image: gentoo/stage3-amd64
-    privileged: true
-    commands:
-      - emerge-webrsync -q
-      - echo "ACCEPT_KEYWORDS="~amd64"" >> /etc/portage/make.conf
-      - echo "MAKEOPTS="-j8"" >> /etc/portage/make.conf
-      #- emerge --autounmask --autounmask-continue --ask=n -quUDN --with-bdeps=y @world --exclude metalog
-      #- emerge --autounmask --autounmask-continue --ask=n -q clang cppcheck
+  publish:
     image: plugins/docker
+    privileged: true
     settings:
+      repo: stkw0/test-image
+      tags:
+        - stkw0/test-image:latest
       username: stkw0
       password:
         from_secret: docker_password
-      repo: stkw0/test-image
